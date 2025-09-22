@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # # Hello, friend!
 #
 # This lab teaches basic Ruby Object syntax.
@@ -32,70 +34,17 @@
 #     def greeting
 #     end
 #
-# Save it. Run the test again.
-#
-# ## Watch it fail some more
-#
-# Now you should see an error like this:
-#
-#     'Friend says hello' FAILED
-#     expected: "Hello!",
-#          got: nil (using ==)
-#     ./friend_spec.rb:5:
-#
-# This means that there is a method, but it's not returning anything! ("nil" is the Ruby way of saying "not anything".)
-#
-# ## Make it return something
-#
-# Inside the "greeting" method, put a single line containing a string that is *not* "Hello!". (Here we are simulating you making an honest mistake, so we can see what the error message looks like.)
-#
-#     def greeting
-#       "whuh?"
-#     end
-#
-# Save it. Run the test again.
-#
-# ## Watch it fail yet again
-#
-# Now you should see an error like this:
-#
-#     'Friend says hello' FAILED
-#     expected: "Hello!",
-#          got: "whuh?" (using ==)
-#     ./friend_spec.rb:5:
-#
-# Correct this by changing "whuh?" to "Hello!". Save it. Run the test again.
-#
-# ## Watch it pass!
-#
-# Hooray! Finally! It works!
-#
-# ## Give yourself a high five
-#
-# Also, sing a song and do a little dance.
-#
-# ## And then...
-#
-# Fix the next failure! :-)
-#
-# Hint 1: in order to get the next test to pass, you will need to pass a *parameter*:
-#
-#     def greeting(who)
-#
-# Hint 2: once you do that, the **first** test might start failing again. To fix both at the same time, you need to provide a **default value** for that parameter:
-#
-#     def greeting(who = nil)
-#
-#
+# Read some basics about ruby classes at
+# https://pine.fm/LearnToProgram/chap_09.html
 
-require "friend"
+require 'friend'
 
 describe Friend do
-  it "says hello" do
-    Friend.new.greeting.should == "Hello!"
+  it 'says hello' do
+    expect(described_class.new.greeting).to eq('Hello!')
   end
 
-  it "says hello to someone" do
-    Friend.new.greeting("Bob").should == "Hello, Bob!"
+  it 'says hello to someone' do
+    expect(described_class.new.greeting('Bob')).to eq('Hello, Bob!')
   end
 end

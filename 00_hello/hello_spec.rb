@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # # Hello!
 #
 # This lab teaches basic Ruby function syntax.
@@ -65,11 +67,13 @@
 #                 got: nil (using ==)
 #          # ./hello/hello_spec.rb:5:in `block (2 levels) in <top (required)>'
 #
-# This means that while it found the file, and it found the function, it's not returning anything! ("nil" is the Ruby way of saying "not anything".)
+# This means that while it found the file, and it found the function, it's not returning anything!
+# ("nil" is the Ruby way of saying "not anything".)
 #
 # ## Make it return something
 #
-# Inside the "hello" function, put a single line containing a string that is *not* "Hello!". (Here we are simulating you making an honest mistake, so we can see what the error message looks like.)
+# Inside the "hello" function, put a single line containing a string that is *not* "Hello!".
+# (Here we are simulating you making an honest mistake, so we can see what the error message looks like.)
 #
 #     def hello
 #       "whuh?"
@@ -113,20 +117,20 @@
 #       "Hello, #{who}!"
 #     end
 #
-require "hello"
+require 'hello'
 
-describe "the hello function" do
-  it "says hello" do
-    hello.should == "Hello!"
+describe 'the hello function' do
+  it 'says hello' do
+    expect(hello).to eq('Hello!')
   end
 end
 
-describe "the greet function" do
-  it "says hello to someone" do
-    greet("Alice").should == "Hello, Alice!"
+describe 'the greet function' do
+  it 'says hello to someone' do
+    expect(greet('Alice')).to eq('Hello, Alice!')
   end
 
-  it "says hello to someone else" do
-    greet("Bob").should == "Hello, Bob!"
+  it 'says hello to someone else' do
+    expect(greet('Bob')).to eq('Hello, Bob!')
   end
 end

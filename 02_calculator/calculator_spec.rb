@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # # Topics
 #
 # * functions
@@ -15,11 +17,10 @@
 #
 # `sum` takes an *array* of parameters and adds them all together
 #
-# # Warning
-#
-# You may not have enough knowledge yet to complete `sum`. You will probably
-# need to use **loops** (e.g. `while`) or **iterators** (e.g. `each`) to
-# get the tests to pass.
+# To complete `sum` you will probably need to use **loops** (e.g. `while`)
+# or **iterators** (e.g. `each`), or more advanced features like `map` and
+# `inject` that work on Enumerables like arrays:
+# https://ruby-doc.org/core/Enumerable.html
 #
 # # Bonus
 #
@@ -33,43 +34,43 @@
 #
 #
 
-require "calculator"
+require 'calculator'
 
-describe "add" do
-  it "adds 0 and 0" do
-    add(0,0).should == 0
+describe 'add' do
+  it 'adds 0 and 0' do
+    expect(add(0, 0)).to eq(0)
   end
 
-  it "adds 2 and 2" do
-    add(2,2).should == 4
+  it 'adds 2 and 2' do
+    expect(add(2, 2)).to eq(4)
   end
 
-  it "adds positive numbers" do
-    add(2,6).should == 8
-  end
-end
-
-describe "subtract" do
-  it "subtracts numbers" do
-    subtract(10,4).should == 6
+  it 'adds positive numbers' do
+    expect(add(2, 6)).to eq(8)
   end
 end
 
-describe "sum" do
-  it "computes the sum of an empty array" do
-    sum([]).should == 0
+describe 'subtract' do
+  it 'subtracts numbers' do
+    expect(subtract(10, 4)).to eq(6)
+  end
+end
+
+describe 'sum' do
+  it 'computes the sum of an empty array' do
+    expect(sum([])).to eq(0)
   end
 
-  it "computes the sum of an array of one number" do
-    sum([7]).should == 7
+  it 'computes the sum of an array of one number' do
+    expect(sum([7])).to eq(7)
   end
 
-  it "computes the sum of an array of two numbers" do
-    sum([7,11]).should == 18
+  it 'computes the sum of an array of two numbers' do
+    expect(sum([7, 11])).to eq(18)
   end
 
-  it "computes the sum of an array of many numbers" do
-    sum([1,3,5,7,9]).should == 25
+  it 'computes the sum of an array of many numbers' do
+    expect(sum([1, 3, 5, 7, 9])).to eq(25)
   end
 end
 
@@ -77,23 +78,21 @@ end
 # once the above tests pass,
 # write tests and code for the following:
 
-describe "#multiply" do
+describe '#multiply' do
+  it 'multiplies two numbers'
 
-  it "multiplies two numbers"
-
-  it "multiplies several numbers"
-
+  it 'multiplies several numbers'
 end
 
-describe "#power" do
-  it "raises one number to the power of another number"
+describe '#power' do
+  it 'raises one number to the power of another number'
 end
 
 # http://en.wikipedia.org/wiki/Factorial
-describe "#factorial" do
-  it "computes the factorial of 0"
-  it "computes the factorial of 1"
-  it "computes the factorial of 2"
-  it "computes the factorial of 5"
-  it "computes the factorial of 10"
+describe '#factorial' do
+  it 'computes the factorial of 0'
+  it 'computes the factorial of 1'
+  it 'computes the factorial of 2'
+  it 'computes the factorial of 5'
+  it 'computes the factorial of 10'
 end

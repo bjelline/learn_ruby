@@ -73,10 +73,10 @@
 Failures:
 
   1) the hello function says hello
-     Failure/Error: hello.should == "Hello!"
+     Failure/Error: expect(hello).to eq("Hello!")
      NameError:
-       undefined local variable or method `hello' for #&lt;RSpec::Core::ExampleGroup::Nested_1:0x000001009b8808&gt;
-     # ./hello/hello_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;'
+       undefined local variable or method `hello' for #<RSpec::ExampleGroups::TheHelloFunction:0x007f81e1a48de0>
+     # ./00_hello/hello_spec.rb:120:in `block (2 levels) in <top (required)>'
 </code></pre>
 
 <h2>Create the hello function</h2>
@@ -99,10 +99,11 @@ end
 Failures:
 
   1) the hello function says hello
-     Failure/Error: hello().should == "Hello!"
+     Failure/Error: expect(hello).to eq("Hello!")
        expected: "Hello!"
-            got: nil (using ==)
-     # ./hello/hello_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;'
+            got: nil
+       (compared using ==)
+     # ./00_hello/hello_spec.rb:120:in `block (2 levels) in <top (required)>'
 </code></pre>
 
 <p>This means that while it found the file, and it found the function, it's not returning anything! ("nil" is the Ruby way of saying "not anything".)</p>
@@ -123,11 +124,11 @@ end
 <p>Now you should see an error like this:</p>
 
 <pre><code>1) the hello function says hello
-   Failure/Error: hello().should == "Hello!"
-     expected: "Hello!"
-          got: "whuh?" (using ==)
-   # ./hello/hello_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;'
-</code></pre>
+     Failure/Error: expect(hello).to eq("Hello!")
+       expected: "Hello!"
+            got: "whuh?"
+       (compared using ==)
+     # ./00_hello/hello_spec.rb:120:in `block (2 levels) in <top (required)>'</code></pre>
 
 <p>Correct this by changing "whuh?" to "Hello!". Save it. Run the test again.</p>
 
@@ -160,21 +161,21 @@ end
   <div class="tests">
     <h1>Tests</h1>
 <a class="raw_file" href="hello_spec.rb">hello_spec.rb</a>
-    <pre>require &quot;hello&quot;
+    <pre>require "hello"
 
-describe &quot;the hello function&quot; do
-  it &quot;says hello&quot; do
-    hello.should == &quot;Hello!&quot;
+describe "the hello function" do
+  it "says hello" do
+    expect(hello).to eq("Hello!")
   end
 end
 
-describe &quot;the greet function&quot; do
-  it &quot;says hello to someone&quot; do
-    greet(&quot;Alice&quot;).should == &quot;Hello, Alice!&quot;
+describe "the greet function" do
+  it "says hello to someone" do
+    expect(greet("Alice")).to eq("Hello, Alice!")
   end
 
-  it &quot;says hello to someone else&quot; do
-    greet(&quot;Bob&quot;).should == &quot;Hello, Bob!&quot;
+  it "says hello to someone else" do
+    expect(greet("Bob")).to eq("Hello, Bob!")
   end
 end</pre>
   </div>

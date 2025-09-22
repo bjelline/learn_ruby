@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # # Topics
 # * arrays
 # * arithmetic
@@ -5,7 +7,10 @@
 #
 # # RPN Calculator
 #
-# "RPN" stands for "Reverse Polish Notation". (See [the wikipedia entry](http://en.wikipedia.org/wiki/Reverse_Polish_notation) for more information on this colorful term.) Briefly, in an RPN world, instead of using normal "infix" notation, e.g.
+# "RPN" stands for "Reverse Polish Notation".
+# See [the wikipedia entry](http://en.wikipedia.org/wiki/Reverse_Polish_notation) for more information
+# on this colorful term.
+# Briefly, in an RPN world, instead of using normal "infix" notation, e.g.
 #
 #     2 + 2
 #
@@ -13,7 +18,9 @@
 #
 #     2 2 +
 #
-# While this may seem bizarre, there are some advantages to doing things this way. For one, you never need to use parentheses, since there is never any ambiguity as to what order to perform operations in. The rule is, you always go from the back, or the left side.
+# While this may seem bizarre, there are some advantages to doing things this way. For one,
+# you never need to use parentheses, since there is never any ambiguity as to what order to perform
+# operations in. The rule is, you always go from the back, or the left side.
 #
 #     1 + 2 * 3 =>
 #     (1 + 2) * 3 or
@@ -33,68 +40,67 @@
 # * <http://en.wikipedia.org/wiki/Reverse_Polish_notation>
 # * <http://www.calculator.org/rpn.aspx>
 #
-require "rpn_calculator"
+require 'rpn_calculator'
 
 describe RPNCalculator do
-
   attr_accessor :calculator
 
   before do
-    @calculator = RPNCalculator.new
+    @calculator = described_class.new
   end
 
-  it "adds two numbers" do
+  it 'adds two numbers' do
     calculator.push(2)
     calculator.push(3)
     calculator.plus
-    calculator.value.should == 5
+    expect(calculator.value).to eq(5)
   end
 
-  it "adds three numbers" do
-    calculator.push(2)
-    calculator.push(3)
-    calculator.push(4)
-    calculator.plus
-    calculator.value.should == 7
-    calculator.plus
-    calculator.value.should == 9
-  end
-
-  it "subtracts the second number from the first number" do
-    calculator.push(2)
-    calculator.push(3)
-    calculator.minus
-    calculator.value.should == -1
-  end
-
-  it "adds and subtracts" do
+  it 'adds three numbers' do
     calculator.push(2)
     calculator.push(3)
     calculator.push(4)
-    calculator.minus
-    calculator.value.should == -1
     calculator.plus
-    calculator.value.should == 1
+    expect(calculator.value).to eq(7)
+    calculator.plus
+    expect(calculator.value).to eq(9)
   end
 
-  it "multiplies and divides" do
+  it 'subtracts the second number from the first number' do
+    calculator.push(2)
+    calculator.push(3)
+    calculator.minus
+    expect(calculator.value).to eq(-1)
+  end
+
+  it 'adds and subtracts' do
+    calculator.push(2)
+    calculator.push(3)
+    calculator.push(4)
+    calculator.minus
+    expect(calculator.value).to eq(-1)
+    calculator.plus
+    expect(calculator.value).to eq(1)
+  end
+
+  it 'multiplies and divides' do
     calculator.push(2)
     calculator.push(3)
     calculator.push(4)
     calculator.divide
-    calculator.value.should == (3.0 / 4.0)
+    expect(calculator.value).to eq(3.0 / 4.0)
     calculator.times
-    calculator.value.should == 2.0 * (3.0 / 4.0)
+    expect(calculator.value).to eq(2.0 * (3.0 / 4.0))
   end
 
-  it "resolves operator precedence unambiguously" do
+  it 'resolves operator precedence unambiguously' do
     # 1 2 + 3 * => (1 + 2) * 3
     calculator.push(1)
     calculator.push(2)
     calculator.plus
     calculator.push(3)
     calculator.times
-    calculator.value.should == (1+2)*3
+    expect(calculator.value).to eq((1 + 2) * 3)
 
     # 1 2 3 * + => 1 + (2 * 3)
     calculator.push(1)
@@ -102,46 +108,50 @@ describe RPNCalculator do
     calculator.push(3)
     calculator.times
     calculator.plus
-    calculator.value.should == 1+(2*3)
+    expect(calculator.value).to eq(1 + (2 * 3))
   end
 
   it "fails informatively when there's not enough values stacked away" do
-    expect {
+    expect do
       calculator.plus
-    }.to raise_error("calculator is empty")
+    end.to raise_error('calculator is empty')
 
-    expect {
+    expect do
       calculator.minus
-    }.to raise_error("calculator is empty")
+    end.to raise_error('calculator is empty')
 
-    expect {
+    expect do
       calculator.times
-    }.to raise_error("calculator is empty")
+    end.to raise_error('calculator is empty')
 
-    expect {
+    expect do
       calculator.divide
-    }.to raise_error("calculator is empty")
+    end.to raise_error('calculator is empty')
   end
 
   # extra credit
-  it "tokenizes a string" do
-    calculator.tokens("1 2 3 * + 4 5 - /").should ==
+  it 'tokenizes a string' do
+    expect(calculator.tokens('1 2 3 * + 4 5 - /')).to eq(
       [1, 2, 3, :*, :+, 4, 5, :-, :/]
+    )
   end
 
   # extra credit
-  it "evaluates a string" do
-    calculator.evaluate("1 2 3 * +").should ==
+  it 'evaluates a string' do
+    expect(calculator.evaluate('1 2 3 * +')).to eq(
       ((2 * 3) + 1)
+    )
 
-    calculator.evaluate("4 5 -").should ==
+    expect(calculator.evaluate('4 5 -')).to eq(
       (4 - 5)
+    )
 
-    calculator.evaluate("2 3 /").should ==
+    expect(calculator.evaluate('2 3 /')).to eq(
       (2.0 / 3.0)
+    )
 
-    calculator.evaluate("1 2 3 * + 4 5 - /").should ==
+    expect(calculator.evaluate('1 2 3 * + 4 5 - /')).to eq(
       (1.0 + (2 * 3)) / (4 - 5)
+    )
   end
-
 end
